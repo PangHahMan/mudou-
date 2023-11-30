@@ -1,6 +1,6 @@
 .PHONY:all
 .PHONY:clean
-all:bind timerfd timerWheel regex request
+all:bind timerfd timerWheel regex request any
 
 bind:bind.cpp
 	g++ -o $@ $^ -std=c++17
@@ -17,5 +17,8 @@ regex:regex.cpp
 request:request.cpp
 	g++ -o $@ $^ -std=c++17
 
+any:any.cpp
+	g++ -o $@ $^ -std=c++17
+
 clean:
-	rm -f bind timerfd timerWheel regex request
+	rm -f bind timerfd timerWheel regex request any

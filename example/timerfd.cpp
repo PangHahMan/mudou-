@@ -18,8 +18,8 @@ int main() {
     struct itimerspec itime;
     itime.it_value.tv_sec = 1;    // 第一次超时时间为1秒后
     itime.it_value.tv_nsec = 0;   // 没有额外纳秒
-    itime.it_interval.tv_sec = 3; // 每次超时的时间间隔为1秒
-    itime.it_interval.tv_nsec = 0;// 每次间隔中没有额外纳秒
+    itime.it_interval.tv_sec = 3; // 每次超时的时间间隔为3秒                 
+    itime.it_interval.tv_nsec = 0;// 每次间隔中没有额外纳秒 
 
     //int timerfd_settime(int __ufd, int __flags, const itimerspec *__utmr, itimerspec *__otmr)
     //flags设置为0 表示__utmr为相对时间，TFD_TIMER_ABSTIME标志，`__utmr` 指定的时间会被看作是绝对时间

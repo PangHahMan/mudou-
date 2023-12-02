@@ -3,7 +3,6 @@
 #include <cstring>
 #include <iostream>
 #include <vector>
-
 #define BUFFER_DEFAULT_SIZE 1024
 
 class Buffer {
@@ -11,11 +10,9 @@ private:
     std::vector<char> _buffer;//使用vector进行内存空间管理
     uint64_t _read_offset;    //读偏移
     uint64_t _write_offset;   //写偏移
-
 public:
     Buffer()
         : _read_offset(0), _write_offset(0), _buffer(BUFFER_DEFAULT_SIZE) {}
-
     // 拷贝构造函数
     Buffer(const Buffer &other)
         : _buffer(other._buffer),

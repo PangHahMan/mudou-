@@ -18,7 +18,7 @@ int main() {
         // 创建一个缓冲区用于接收客户端发送的数据
         char buffer[1024] = {0};
 
-        // 接收客户端发送的数据
+        // 从newfd接收客户端发送的数据
         int ret = client_sock.Recv(buffer, 1023);
         if (ret < 0) {
             // 如果接收数据出错，关闭与客户端的连接

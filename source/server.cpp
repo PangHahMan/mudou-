@@ -1,5 +1,4 @@
 #include "server.hpp"
-
 void test_buffer1() {
     Buffer buf;
     std::string str = "Hello!";

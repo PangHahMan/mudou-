@@ -48,12 +48,11 @@ public:
     //当前是否监控了可写
     bool write_able(){
         return _revents & EPOLLOUT;
-    }  ewwwwwww.eeew3qrfew3qrfew3qeqasdsassssssadasdrerqwerwewrewrre
-
+    } 
     void enable_read();  //启动读事件监控
-   11 void enable_write(); //启动写事件监控
+    void enable_write(); //启动写事件监控
     void disable_read(); //停止读事件监控
-    void333.....................0.............................................                                        vcxvxcxvvvvvdddddxcf c disable_write();//停止写事件监控
+    void disable_write();//停止写事件监控
     void disable_all();  //停止所有事件监控
     void remove();       //移除所有事件监控
     void handle_event(); //处理事件,一旦连接触发了事件，就调用这个函数

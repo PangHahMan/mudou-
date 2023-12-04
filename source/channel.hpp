@@ -43,17 +43,62 @@ public:
     }
     //当前是否监控了可读
     bool read_able() {
-        return _revents & EPOLLIN;  //& 检查_revents变量是否设置了EPOLLIN标志
+        return _revents & EPOLLIN;//& 检查_revents变量是否设置了EPOLLIN标志
     }
     //当前是否监控了可写
-    bool write_able(){
+    bool write_able() {
         return _revents & EPOLLOUT;
+    }
+    //启动读事件监控
+    void enable_read() {
+        _events |= EPOLLIN;
+    }
+    //启动写事件监控
+    void enable_write(){
+        _events |= EPOLLOUT;
+    }
+    //关闭读事件监控
+    void disable_read(){
+        _events &= ~EPOLLIN;
     } 
-    void enable_read();  //启动读事件监控
-    void enable_write(); //启动写事件监控
-    void disable_read(); //停止读事件监控
-    void disable_write();//停止写事件监控
-    void disable_all();  //停止所有事件监控
-    void remove();       //移除所有事件监控
-    void handle_event(); //处理事件,一旦连接触发了事件，就调用这个函数
+    //关闭写事件监控
+    void disable_write(){
+        _events &= ~EPOLLOUT;
+    }
+    //关闭所有事件监控
+    void disable_all(){
+        _events = 0;
+    }  
+    //移除所有事件监控,后边会调用EventLoop接口来移除监控
+    void remove();       
+    //处理事件,一旦连接触发了事件，就调用这个函数
+    void handle_event(){
+        //EPOLLIN: 这个标志位表明对应的文件描述符上有可读取的数据。
+        //EPOLLHUP: 这个标志位表明连接已经断开，或者对应的文件描述符被挂断。
+        //EPOLLPRI: 这个标志位表明对应的文件描述符上有紧急的或者高优先级的数据可读取。
+        if((_revents & EPOLLIN) || (_revents & EPOLLHUP) ||(_revents & EPOLLPRI)){
+            if(_read_callback){
+                _read_callback(); 
+            }
+        }
+        if(_revents & EPOLLOUT){
+            if(_write_callback){
+                _write_callback();
+            }
+        }
+        if(_revents & EPOLLERR){
+            if(_error_callback){
+                _error_callback();
+            }
+        }
+        if(_revents & EPOLLHUP){
+            if(_close_callback){
+                _close_callback();
+            }
+        }
+        //不管任何事件，都调用的回调函数
+        if(_event_callback){
+            _event_callback();
+        }
+    }
 };

@@ -8,7 +8,7 @@
 int main() {
     //int timerfd_create(clockid_t __clock_id, int __flags)
     //clock_id：CLOCK_REALTIME：系统范围的实时时钟   CLOCK_MONOTONIC：单调递增时钟
-    //flags：0 或者 `TFD_NONBLOCK` 使文件描述符处于非阻塞模式。TFD_CLOEXEC` 在执行 `exec()` 系列函数时关闭文件描述符。
+    //flags：0 阻塞模式， `TFD_NONBLOCK` 使文件描述符处于非阻塞模式。TFD_CLOEXEC` 在执行 `exec()` 系列函数时关闭文件描述符。
     int timerfd = timerfd_create(CLOCK_MONOTONIC, 0);
     if (timerfd < 0) {
         perror("timerfd_create error");

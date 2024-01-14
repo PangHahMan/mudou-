@@ -12,7 +12,12 @@ void print(const std::string &str, int num) {
     cout << str << " " << num << endl;
 }
 
-int main() {
+void test1() {
+    auto func = bind(print, "hello", std::placeholders::_1);
+    func(5);
+}
+
+void test2() {
     using Task = std::function<void()>;
     vector<Task> array;
 
@@ -22,5 +27,9 @@ int main() {
     for (auto &f: array) {
         f();
     }
+}
+
+int main() {
+    test2();
     return 0;
 }
